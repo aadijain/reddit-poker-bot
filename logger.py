@@ -1,7 +1,7 @@
 import logging
 import logging.handlers
 
-LOG_FILENAME = 'backup.out'
+LOG_FILENAME = 'bot.log'
 
 # Set up a specific logger with our desired output level
 my_logger = logging.getLogger('MyLogger')
@@ -14,9 +14,5 @@ handler.setFormatter(log_formatter)
 my_logger.addHandler(handler)
 
 # Log some messages
-msg_old = ''
 def log(msg):
-    global msg_old
-    if(str(msg) == str(msg_old)):
-        my_logger.debug(msg)
-        msg_old = msg
+    my_logger.debug(msg)
