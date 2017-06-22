@@ -2,8 +2,9 @@ import logging
 import logging.handlers
 
 LOG_FILENAME = 'bot.log'
+DUMP_FILENAME = 'data.out'
 
-# Set up a specific logger with our desired output level
+# Set up a specific logger
 my_logger = logging.getLogger('MyLogger')
 log_formatter = logging.Formatter('%(asctime)s %(message)s')
 my_logger.setLevel(logging.DEBUG)
@@ -13,6 +14,20 @@ handler = logging.handlers.RotatingFileHandler(LOG_FILENAME, maxBytes=1*1024*102
 handler.setFormatter(log_formatter)
 my_logger.addHandler(handler)
 
+# Set up a specific dumper
+my_dumper = logging.getLogger('MyDumper')
+dump_formatter = logging.Formatter('%(message)s')
+my_dumper.setLevel(logging.DEBUG)
+
+# Add the dump message handler to the dumper
+handler2 = logging.handlers.RotatingFileHandler(DUMP_FILENAME, maxBytes=1*1024*1024, backupCount=3)
+handler2.setFormatter(dump_formatter)
+my_dumper.addHandler(handler2)
+
 # Log some messages
 def log(msg):
     my_logger.debug(msg)
+
+# Dump Data
+def dump(var):
+    my_dumper.debug(var)
