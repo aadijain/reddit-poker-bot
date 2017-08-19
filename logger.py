@@ -25,7 +25,9 @@ handler2.setFormatter(dump_formatter)
 my_dumper.addHandler(handler2)
 
 # Log some messages
-def log(msg):
+def log(msg, C_ID=None):
+    if(C_ID):
+        my_logger.debug(C_ID)
     my_logger.debug(msg)
 
 # Dump Data

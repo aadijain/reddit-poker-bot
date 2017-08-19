@@ -40,4 +40,5 @@ if __name__ == '__main__':
                          username=config["username"],
                          password=config["password"])
     #sample_bot
+    reddit.read_only = True
     start(reddit)
