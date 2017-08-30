@@ -1,4 +1,3 @@
-import logging
 from sanitize import validate
 from random import randint
 
@@ -8,7 +7,7 @@ def main(cards):
 
     dec = gen_dec()
     sample_space = list()
-    for i in range(0,1000):
+    for i in range(0, 1000):
         sample_space.append(simulate(validate(cards), dec))
 
 
@@ -31,12 +30,12 @@ def simulate(draw, dec):
 
     # add random cards to complete the board
     for j in range(0, sim_num):
-        rand_int = rand_int(0,dec.__len__())
+        rand_int = randint(0, dec.__len__())
         draw[0].append(dec[rand_int])
         del dec[rand_int:rand_int + 1]
 
     # add random cards for to simulate player 2
-    for j in range (0, 2):
+    for j in range(0, 2):
         player2.append(dec[randint(0, dec.__len__())])
 
     # add board cards back to the dec
@@ -57,8 +56,8 @@ def simulate(draw, dec):
 def gen_dec():
 
     dec = list()
-    for i in (0,3):
-        for j in range(2,14):
-            dec.append(j,i)
+    for i in (0, 3):
+        for j in range(2, 14):
+            dec.append((j, i))
 
     return dec
