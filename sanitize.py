@@ -8,8 +8,8 @@ def validate(cards):
     # check formatting
     try:
         board_count = cards.index(' ')
-    except Exception:
-        logging.error("Input format error, no space found!", Exception)
+    except Exception as e:
+        logging.error("Input format error, no space found!", e)
         return None
 
     board = cards[:board_count]
@@ -29,8 +29,8 @@ def validate(cards):
     # check for duplicate card entry
     temp_hand = board + hand
     for i in range(0, temp_hand.__len__() - 2, 2):
-        card1 = temp_hand[i] + temp_hand [i + 1]
-        for j in range (i + 2, temp_hand.__len__(), 2):
+        card1 = temp_hand[i] + temp_hand[i + 1]
+        for j in range(i + 2, temp_hand.__len__(), 2):
             card2 = temp_hand[j] + temp_hand[j + 1]
             if card1 == card2:
                 logging.error("Repeated card!", card1)
