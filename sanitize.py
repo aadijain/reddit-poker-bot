@@ -43,7 +43,7 @@ def convert(cards):
         value = cards[i]
         suite = cards[i + 1]
 
-        if value == '1':
+        if value == '1' or value == 'a':
             value = 14
         elif value == 't':
             value = 10
