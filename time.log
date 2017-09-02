@@ -1,0 +1,34 @@
+[ 10000000 ]
+[Draws, Wins, Losses]:
+[1183267, 8695674, 121059]
+Simulation time		GetBest Time	Total Time
+116.349028349 		461.975974798 	578.325003147
+5.81745141745e-06 	4.61975974798e-05
+
+[ 1000000 ]
+[Draws, Wins, Losses]:
+[5997, 598499, 395504]
+Simulation time		GetBest Time	Total Time
+11.8510110378 		54.8079879284 	66.6589989662
+5.92550551891e-06 	5.48079879284e-05
+
+[ 100000 ]
+[Draws, Wins, Losses]:
+[184, 58365, 41451]
+Simulation time		GetBest Time	Total Time
+1.17299962044 		4.56700062752 	5.74000024796
+5.86499810219e-06 	4.56700062752e-05
+
+[ 10000 ]
+[Draws, Wins, Losses]:
+[136, 5961, 3903]
+Simulation time		GetBest Time	Total Time
+0.121999979019 		0.5 	0.621999979019
+6.09999895096e-06 	5e-05
+
+[ 1000 ]
+[Draws, Wins, Losses]:
+[5, 446, 549]
+Simulation time		GetBest Time	Total Time
+0.00900053977966 		0.0629994869232 	0.0720000267029
+4.50026988983e-06 	6.29994869232e-05
