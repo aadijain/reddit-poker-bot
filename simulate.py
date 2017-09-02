@@ -1,14 +1,19 @@
 from sanitize import validate
-from random import randint
+# from random import randint
 from priority import getBest
+import random
+import time
 
-wins = [0,0,0]
+wins = [0, 0, 0]
+simulate_time = 0
+getBest_time = 0
 
 
 # Simulates 1000 draw (default) and calculates winning odds
 def main(cards, monte_count=1000):
 
-    dec = gen_dec()
+    dec = gen_dec()  # Generate dec of cards
+
     global wins
     wins = [0, 0, 0]
 
@@ -23,8 +28,16 @@ def main(cards, monte_count=1000):
 # Calls getBest() abd updates winning hand
 def result(cards):
 
-    p1 = getBest(cards[0] + cards[1])
-    p2 = getBest(cards[0] + cards[2])
+    # Time calculations
+    global getBest_time
+
+    t0 = time.time()
+    p1 = getBest(cards[0] + cards[1])  # get best hand for P1
+    getBest_time += time.time() - t0
+
+    t0 = time.time()
+    p2 = getBest(cards[0] + cards[2])  # get best hand for P2
+    getBest_time += time.time() - t0
 
     if p1 > p2:
         wins[1] += 1
@@ -36,6 +49,10 @@ def result(cards):
 
 # selects cards randomly to complete the draw
 def simulate(draw, dec):
+
+    # Time calculation
+    global simulate_time
+    t1 = time.time()
 
     player2 = list()
     board_len = draw[0].__len__()
@@ -51,13 +68,15 @@ def simulate(draw, dec):
 
     # add random cards to complete the board
     for j in range(0, sim_num):
-        rand_int = randint(0, dec.__len__() - 1)
+        rand_int = int(random.random() * dec.__len__())
+        # rand_int = randint(0, dec.__len__() - 1)
         draw[0].append(dec[rand_int])
         del dec[rand_int:rand_int + 1]
 
     # add random cards for to simulate player 2
     for j in range(0, 2):
-        rand_int = randint(0, dec.__len__() - 1)
+        rand_int = int(random.random() * dec.__len__())
+        # rand_int = randint(0, dec.__len__() - 1)
         player2.append(dec[rand_int])
         del dec[rand_int:rand_int + 1]
 
@@ -70,8 +89,10 @@ def simulate(draw, dec):
     dec.append(player2[1])
     dec.append(draw[1][0])
     dec.append(draw[1][1])
-    if sorted(dec) != sorted(gen_dec()):
-        print "!!!!!!!!!!ERRORRR!!!!!!"
+
+    # calculate total time
+    simulate_time += time.time() - t1
+
     # return draw and 2 players data as a collection of tuples.
     return draw[0], draw[1], player2
 
@@ -86,5 +107,16 @@ def gen_dec():
 
     return dec
 
+
 # Tester function call
-print main(validate("1h2h3h4h5s 4c5c"), 10000)
+
+count = int(10000000)
+card = "2s3s5h 5d6h"
+
+# Printing values
+print "[Draws, Wins, Losses]:\n", main(validate(card), count)  # Printing result
+
+# Printing time calculations
+print "Simulation time\t\tGetBest Time\tTotal Time"
+print simulate_time, "\t\t", getBest_time, "\t", simulate_time+getBest_time
+print simulate_time * 1.00/(2*count), "\t", getBest_time * 1.00/count
