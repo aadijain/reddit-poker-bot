@@ -1,30 +1,24 @@
-import logging
-
-
 def validate(cards):
 
     cards.lower()
+    cards.strip()
 
     # check formatting
     try:
         board_count = cards.index(' ')
     except Exception as e:
-        logging.error("Input format error, no space found!", e)
-        return None
+        return None, "Input format error, no space found!", e
 
     board = cards[:board_count]
     hand = cards[board_count + 1:]
 
     # check for flop and 2 card hand
     if board.__len__() < 6:
-        logging.error("Pre-flop data not accepted!", board)
-        return None
+        return None, "Pre-flop data not accepted!", board
     elif board.__len__() > 10:
-        logging.error("Greater than 5 cards on board!", board)
-        return None
+        return None, "Greater than 5 cards on board!", board
     if hand.__len__() != 4:
-        logging.error("Hand information error!", hand)
-        return None
+        return None, "Hand information error!", hand
 
     # check for duplicate card entry
     temp_hand = board + hand
@@ -33,8 +27,7 @@ def validate(cards):
         for j in range(i + 2, temp_hand.__len__(), 2):
             card2 = temp_hand[j] + temp_hand[j + 1]
             if card1 == card2:
-                logging.error("Repeated card!", card1)
-                return None
+                return None, "Repeated card!", card1
 
     board_list = convert(board)
     hand_list = convert(hand)
@@ -50,8 +43,8 @@ def convert(cards):
         value = cards[i]
         suite = cards[i + 1]
 
-        if value == 1:
-            value = int(value) + 13
+        if value == '1':
+            value = 14
         elif value == 't':
             value = 10
         elif value == 'j':
