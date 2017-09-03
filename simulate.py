@@ -114,9 +114,8 @@ count = int(10000000)
 card = "2s3s5h 5d6h"
 
 # Printing values
+print "[", count, "]"
 print "[Draws, Wins, Losses]:\n", main(validate(card), count)  # Printing result
-
-# Printing time calculations
 print "Simulation time\t\tGetBest Time\tTotal Time"
 print simulate_time, "\t\t", getBest_time, "\t", simulate_time+getBest_time
 print simulate_time * 1.00/(2*count), "\t", getBest_time * 1.00/count
